@@ -18,6 +18,30 @@ let number = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 //define highscore
 let highscore = 0;
+//function for displaying message
+const displayMessage = function (message) {
+  document.querySelector('.guessing-message').textContent = message;
+};
+//function for secret number
+const correctNumber = function (number) {
+  document.querySelector('.the-correct-number').textContent = number;
+};
+
+//function for background color
+const bodyBackgroundColor = function (color) {
+  document.querySelector('body').style.backgroundColor = color;
+};
+
+//function for secret number font size
+
+const correctNumberFontSize = function (size) {
+  document.querySelector('.the-correct-number').style.fontSize = size;
+};
+
+// function for score content
+const displayScore = function (score) {
+  document.querySelector('.score').textContent = score;
+};
 
 // adding functionality to check! btn after clicking it
 
@@ -33,21 +57,31 @@ document.querySelector('.check-btn').addEventListener('click', function (e) {
   // check if there is no guess in the input and display message No Number if there is no input
 
   if (!input) {
-    document.querySelector('.guessing-message').textContent = 'No Number!';
+    // document.querySelector('.guessing-message').textContent = 'No Number!';
+    displayMessage('No Number!');
+
     // if user privides number greater that 20 or less than 1, display message worng number
   } else if (input > 20 || input < 1) {
-    document.querySelector('.guessing-message').textContent = 'Wrong number🚩';
+    // document.querySelector('.guessing-message').textContent = 'Wrong number🚩';
+    displayMessage('Wrong number🚩');
     // if the provided numer is equal secret number display correct number message
   } else if (input === number) {
-    document.querySelector('.guessing-message').textContent =
-      'Correct Number!🏆';
+    // document.querySelector('.guessing-message').textContent =
+    //   'Correct Number!🏆';
+    displayMessage('Correct Number!🏆');
     //display secret number
-    document.querySelector('.the-correct-number').textContent = number;
+    // document.querySelector('.the-correct-number').textContent = number;
+
+    correctNumber(number);
     //changing page color to green when player wins.
     //selecing the body element.style.what we want to change = "new value" ( a string)
-    document.querySelector('body').style.backgroundColor = '#bdccb4';
+    // document.querySelector('body').style.backgroundColor = '#bdccb4';
+
+    bodyBackgroundColor('#bdccb4');
     //changing size of the secret number when player wins
-    document.querySelector('.the-correct-number').style.fontSize = '150px';
+    // document.querySelector('.the-correct-number').style.fontSize = '150px';
+
+    correctNumberFontSize('150px');
 
     //highscore --> checing if the  score is greater than highscore and if it is it should be the new highscore
     if (score > highscore) {
@@ -58,18 +92,23 @@ document.querySelector('.check-btn').addEventListener('click', function (e) {
   } else if (input !== number) {
     // when score is >1 the below logic applies: if the provided number is greated than secret number, the displayed message should be " too high" and if it is not, the message should be "too low"
     if (score > 1) {
-      document.querySelector('.guessing-message').textContent =
-        input > number ? 'Too high 📈' : 'Too low 📉';
+      // document.querySelector('.guessing-message').textContent =
+      //   input > number ? 'Too high 📈' : 'Too low 📉';
+
+      displayMessage(input > number ? 'Too high 📈' : 'Too low 📉');
       // the score should  descrese by 1
       score--;
       //the score should be assigned to score value
-      document.querySelector('.score').textContent = score;
+      // document.querySelector('.score').textContent = score;
+      displayScore(score);
     } else {
       // if the score is not greater than 1 the message should be "you lost the game"
-      document.querySelector('.guessing-message').textContent =
-        'You lost the game 🙈';
+      // document.querySelector('.guessing-message').textContent =
+      //   'You lost the game 🙈';
+      displayMessage('You lost the game 🙈');
       // and the score should be changed to 0
-      document.querySelector('.score').textContent = 0;
+      // document.querySelector('.score').textContent = 0;
+      displayScore(0);
     }
   }
 
@@ -106,15 +145,21 @@ document.querySelector('.again-btn').addEventListener('click', function () {
   // restoring secrect number
   number = Math.trunc(Math.random() * 20) + 1;
   //chaning background color back to pink after clicking again button
-  document.querySelector('body').style.backgroundColor = '#ffe2f3';
+  // document.querySelector('body').style.backgroundColor = '#ffe2f3';
+
+  bodyBackgroundColor('#ffe2f3');
   //resetting secret number back to "?" afetr clicing again button
-  document.querySelector('.the-correct-number').textContent = '?';
+  // document.querySelector('.the-correct-number').textContent = '?';
+  correctNumber('?');
   //chaning font size of secret numer back to 100px after clicking again button
-  document.querySelector('.the-correct-number').style.fontSize = '100px';
+  // document.querySelector('.the-correct-number').style.fontSize = '100px';
+  correctNumberFontSize('100px');
   // resseting message back to "start guessing" after clicking again button
-  document.querySelector('.guessing-message').textContent = 'Start guessing...';
+  // document.querySelector('.guessing-message').textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
   // resetting score to 20
-  document.querySelector('.score').textContent = score;
+  // document.querySelector('.score').textContent = score;
+  displayScore(score);
   // resetting input field
   document.querySelector('.input').value = '';
 });
